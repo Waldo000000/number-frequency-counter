@@ -1,17 +1,19 @@
-<fibonacci-numbers on-submit="$ctrl.onSubmit(number)"></fibonacci-numbers>
-<button class="toggle" ng-click="$ctrl.toggle()">{{$ctrl.running ? "Halt" : "Resume"}}</button>
-<button ng-click="$ctrl.quit()">Quit</button>
+<div ng-if="!$ctrl.hasQuit">
+  <fibonacci-numbers on-submit="$ctrl.onSubmit(number)"></fibonacci-numbers>
+  <button class="toggle" ng-click="$ctrl.toggle()">{{$ctrl.running ? "Halt" : "Resume"}}</button>
+  <button ng-click="$ctrl.quit()">Quit</button>
 
-<table ng-if="!$ctrl.hasQuit" class="output">
-  <tr>
-    <th class="timestamp">Timestamp</th>
-    <th class="message">Message</th>
-  </tr>
-  <tr ng-repeat="record in $ctrl.output">
-    <td>{{record.timestamp}}</td>
-    <td>{{record.message}}</td>
-  </tr>
-</table>
+  <table ng-if="!$ctrl.hasQuit" class="output">
+    <tr>
+      <th class="timestamp">Timestamp</th>
+      <th class="message">Message</th>
+    </tr>
+    <tr ng-repeat="record in $ctrl.output">
+      <td>{{record.timestamp}}</td>
+      <td>{{record.message}}</td>
+    </tr>
+  </table>
+</div>
 
 <div ng-if="$ctrl.hasQuit">
   Thanks for playing! Here is the final tally:
