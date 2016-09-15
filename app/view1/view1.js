@@ -31,8 +31,8 @@ view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function (
     $scope.hasQuit = true;
   }
   
-  $scope.onSubmit = function onSubmit(number) {
-    numbersToAccumulate.push(number);
+  $scope.onSubmit = function onSubmit(n) {
+    numbersToAccumulate.push(n);
   }
   
   $scope.toggle();
@@ -40,17 +40,22 @@ view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function (
   var totalFrequencies = {};
   function writeFrequencies() { 
     
-    function countFrequencies(frequencies, num) {
-      frequencies[num] = (frequencies[num] + 1) || 1;
+    function accumulateFrequencies(frequencies, n) {
+      frequencies[n] = (frequencies[n] + 1) || 1;
       return frequencies;
     }
     
-    totalFrequencies = numbersToAccumulate.reduce(countFrequencies, totalFrequencies);
+    totalFrequencies = numbersToAccumulate.reduce(accumulateFrequencies, totalFrequencies);
     numbersToAccumulate = [];
     
     $scope.output.push({ 
       timestamp: new Date(), 
-      message: totalFrequencies
+      message: format(totalFrequencies)
     });
+    
+    function format(frequencies) {
+      var sortedNumbers = Object.keys(frequencies).sort(function (a, b) { return frequencies[b] - frequencies[a] });
+      return sortedNumbers.map(function (n) { return n + ':' + frequencies[n] }).join(',');
+    }
   }
 }]);
