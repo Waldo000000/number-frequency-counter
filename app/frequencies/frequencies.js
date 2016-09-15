@@ -37,7 +37,7 @@ frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function
   }
   
   this.finalTally = function finalTally() {
-    return this.output[this.output.length - 1].message;
+    return this.output[this.output.length - 1].message || '(no numbers were input)';
   }
 
   this.toggle(); // Begin!
