@@ -1,11 +1,11 @@
 'use strict';
 
-var numbers = angular.module('myApp.numbers', []);
-numbers.component('numbers', {
+var fibonacciNumbers = angular.module('myApp.fibonacciNumbers', []);
+fibonacciNumbers.component('fibonacciNumbers', {
   bindings: {
     onSubmit: '&'
   },
-  templateUrl: 'components/numbers/numbers.html',
+  templateUrl: 'components/fibonacciNumbers/fibonacciNumbers.html',
   controller: function () {
     this.submit = function submit(number) {
       if (this.numberForm.$invalid) {
