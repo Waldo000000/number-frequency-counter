@@ -22,7 +22,7 @@ view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function (
       $scope.running = null;
     }
     else {      
-      $scope.running = $interval(writeFrequencies, interval);
+      $scope.running = $interval(writeFrequencies, interval * 1000);
     }
   };
   
