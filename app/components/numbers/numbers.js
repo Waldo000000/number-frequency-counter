@@ -18,8 +18,16 @@ numbers.component('numbers', {
       this.numberForm.$setPristine();
     }
     
-    var isFibonacci = function isFibonacci(number) {
-      return number == 3; // TODO
+    // From Binet's formula (https://en.wikipedia.org/wiki/Fibonacci_number#Recognizing_Fibonacci_numbers)
+    function isFibonacci(n)
+    {
+      var x = 5 * n * n;
+      return isSquare(x + 4) || isSquare(x - 4);
+
+      function isSquare(n)
+      {
+        return n > 0 && Math.sqrt(n) % 1 === 0;
+      }
     }
   }   
 });
