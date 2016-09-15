@@ -1,0 +1,5 @@
+<form name="numberForm">
+  <input name="number" required type="number" ng-model="$ctrl.number"></input>
+  <input type="submit" ng-disabled="numberForm.$invalid" ng-click="$ctrl.submit($ctrl.number)" value="Submit" />
+  <span ng-if="numberForm.number.$error.required">Please enter an integer</span>
+</form>

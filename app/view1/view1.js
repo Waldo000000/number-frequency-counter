@@ -13,6 +13,7 @@ view1.controller('View1Ctrl', ['$scope', '$interval', function ($scope, $interva
   var interval = 1000;
       
   $scope.output = [];
+  $scope.numbers = [];
   
   $scope.toggle = function toggle() {
     if ($scope.running) {
@@ -27,6 +28,9 @@ view1.controller('View1Ctrl', ['$scope', '$interval', function ($scope, $interva
   $scope.toggle();
   
   function writeFrequencies() { 
-    $scope.output = $scope.output.concat({ timestamp: new Date(), message: 'Frequencies to be written here' });
+    $scope.output = $scope.output.concat({ 
+      timestamp: new Date(), 
+      message: $scope.numbers.join(', ')
+    });
   }
 }]);
