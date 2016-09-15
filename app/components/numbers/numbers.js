@@ -8,8 +8,18 @@ numbers.component('numbers', {
   templateUrl: 'components/numbers/numbers.html',
   controller: function () {
     this.submit = function submit(number) {
-      this.list = this.list.concat(number);
+      if (this.numberForm.$invalid) {
+        this.numberForm.$setDirty();
+        return;
+      }
+      this.list.push(number);
+      this.wasFibonacciEntered = isFibonacci(number);
       this.number = null;
+      this.numberForm.$setPristine();
+    }
+    
+    var isFibonacci = function isFibonacci(number) {
+      return number == 3; // TODO
     }
   }   
 });
