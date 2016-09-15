@@ -25,6 +25,11 @@ view1.controller('View1Ctrl', ['$scope', '$interval', function ($scope, $interva
     }
   };
   
+  $scope.quit = function quit() {
+    $interval.cancel($scope.running);
+    $scope.hasQuit = true;
+  }
+  
   $scope.toggle();
   
   function writeFrequencies() { 

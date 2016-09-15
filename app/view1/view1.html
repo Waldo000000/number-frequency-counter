@@ -1,7 +1,8 @@
 <button class="toggle" ng-click="toggle()">{{running ? "Halt" : "Resume"}}</button>
 <numbers list="numbers"></numbers>
+<button ng-click="quit()">Quit</button>
 
-<table class="output">
+<table ng-if="!hasQuit" class="output">
   <tr>
     <th class="timestamp">Timestamp</th>
     <th class="message">Message</th>
@@ -11,3 +12,8 @@
     <td>{{record.message}}</td>
   </tr>
 </table>
+
+<div ng-if="hasQuit">
+  Thanks for playing! Here is the final tally:
+  <div>{{output[output.length-1].message}}</div>
+</div>
