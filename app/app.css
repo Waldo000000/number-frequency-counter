@@ -58,3 +58,12 @@ td, th {
 .toggle {
   width: 100px;
 }
+
+.error {
+  color: red;
+}
+
+.alert {
+  color: darkorange;
+  font-weight: bold;
+}

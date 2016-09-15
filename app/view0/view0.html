@@ -3,9 +3,6 @@
     Please input the number of time in seconds between emitting numbers and their frequency:
     <input name="interval" required min="1" type="number" ng-model="$ctrl.interval"></input>
   </label>
-  <span ng-if="$ctrl.form.$dirty && $ctrl.form.$invalid">Please enter an integer greater than or equal to 1</span>
-  
-  <a href="#!/view1/{{$ctrl.interval}}">Let's go</a>
-  <!--<button type="submit" ng-click="$ctrl.submit($ctrl.number)">Submit</button>-->
-  <!--<span ng-if="$ctrl.numberForm.$dirty && $ctrl.numberForm.$invalid">Please enter an integer</span>-->
+  <button type="submit" ng-click="$ctrl.go('/view1/' + $ctrl.interval)">Begin</button>
+  <span class="error" ng-if="$ctrl.form.$dirty && $ctrl.form.$invalid">Please enter a number greater than or equal to 1</span>
 </ng-form>

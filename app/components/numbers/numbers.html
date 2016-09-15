@@ -1,6 +1,6 @@
 <ng-form name="$ctrl.numberForm">
   <input name="number" required type="number" ng-model="$ctrl.number"></input>
   <button type="submit" ng-click="$ctrl.submit($ctrl.number)">Submit</button>
-  <span ng-if="$ctrl.numberForm.$pristine && $ctrl.wasFibonacciEntered">FIB</span>
-  <span ng-if="$ctrl.numberForm.$dirty && $ctrl.numberForm.$invalid">Please enter an integer</span>
+  <span class="alert" ng-if="$ctrl.numberForm.$pristine && $ctrl.wasFibonacciEntered">FIB</span>
+  <span class="error" ng-if="$ctrl.numberForm.$dirty && $ctrl.numberForm.$invalid">Please enter an integer</span>
 </ng-form>
