@@ -3,14 +3,14 @@
 var view1 = angular.module('myApp.view1', ['ngRoute'])
 
 view1.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/view1', {
+  $routeProvider.when('/view1/:interval', {
     templateUrl: 'view1/view1.html',
     controller: 'View1Ctrl'
   });
 }]);
 
-view1.controller('View1Ctrl', ['$scope', '$interval', function ($scope, $interval) {
-  var interval = 1000;
+view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function ($scope, $interval, $routeParams) {
+  var interval = $routeParams.interval;
       
   $scope.output = [];
   $scope.numbers = [];
