@@ -49,7 +49,7 @@ view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function (
     numbersToAccumulate = [];
     
     $scope.output.push({ 
-      timestamp: new Date(), 
+      timestamp: new Date().toLocaleString(), 
       message: format(totalFrequencies)
     });
     
