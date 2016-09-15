@@ -11,9 +11,10 @@ frequencies.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function ($interval, $routeParams) {
+  
   var interval = $routeParams.interval;
   var numbersToAccumulate = [];
-      
+  var totalFrequencies = {};
   this.output = [];
   
   this.toggle = function toggle() {
@@ -38,26 +39,25 @@ frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function
   this.finalTally = function finalTally() {
     return this.output[this.output.length - 1].message;
   }
-  
-  this.toggle();
-  
-  var totalFrequencies = {};
+
+  this.toggle(); // Begin!
+
   function writeFrequencies() { 
+        
+    totalFrequencies = numbersToAccumulate.reduce(accumulateFrequencies, totalFrequencies);
+    numbersToAccumulate = [];
+    
+    this.output.push({ 
+      timestamp: new Date().toLocaleString(), 
+      message: formattedSortedFrequencies(totalFrequencies)
+    });
     
     function accumulateFrequencies(frequencies, n) {
       frequencies[n] = (frequencies[n] + 1) || 1;
       return frequencies;
     }
     
-    totalFrequencies = numbersToAccumulate.reduce(accumulateFrequencies, totalFrequencies);
-    numbersToAccumulate = [];
-    
-    this.output.push({ 
-      timestamp: new Date().toLocaleString(), 
-      message: format(totalFrequencies)
-    });
-    
-    function format(frequencies) {
+    function formattedSortedFrequencies(frequencies) {
       var sortedNumbers = Object.keys(frequencies).sort(function (a, b) { return frequencies[b] - frequencies[a] });
       return sortedNumbers.map(function (n) { return n + ':' + frequencies[n] }).join(',');
     }
