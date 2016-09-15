@@ -20,6 +20,9 @@ angular.module('myApp.fibonacciNumbers', []).component('fibonacciNumbers', {
     // From Binet's formula (https://en.wikipedia.org/wiki/Fibonacci_number#Recognizing_Fibonacci_numbers)
     function isFibonacci(n)
     {
+      if (n <= 0)
+        return false;
+         
       var x = 5 * n * n;
       return isSquare(x + 4) || isSquare(x - 4);
 
