@@ -28,9 +28,15 @@ view1.controller('View1Ctrl', ['$scope', '$interval', function ($scope, $interva
   $scope.toggle();
   
   function writeFrequencies() { 
+    
+    function countFrequencies(frequencies, num) {
+      frequencies[num] = (frequencies[num] + 1) || 1;
+      return frequencies;
+    }
+    
     $scope.output = $scope.output.concat({ 
       timestamp: new Date(), 
-      message: $scope.numbers.join(', ')
+      message: $scope.numbers.reduce(countFrequencies, {})
     });
   }
 }]);
