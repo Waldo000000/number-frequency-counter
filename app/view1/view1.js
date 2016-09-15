@@ -11,6 +11,7 @@ view1.config(['$routeProvider', function ($routeProvider) {
 
 view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function ($scope, $interval, $routeParams) {
   var interval = $routeParams.interval;
+  var numbersToAccumulate = [];
       
   $scope.output = [];
   $scope.numbers = [];
@@ -30,8 +31,13 @@ view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function (
     $scope.hasQuit = true;
   }
   
+  $scope.onSubmit = function onSubmit(number) {
+    numbersToAccumulate.push(number);
+  }
+  
   $scope.toggle();
   
+  var totalFrequencies = {};
   function writeFrequencies() { 
     
     function countFrequencies(frequencies, num) {
@@ -39,9 +45,12 @@ view1.controller('View1Ctrl', ['$scope', '$interval', '$routeParams', function (
       return frequencies;
     }
     
-    $scope.output = $scope.output.concat({ 
+    totalFrequencies = numbersToAccumulate.reduce(countFrequencies, totalFrequencies);
+    numbersToAccumulate = [];
+    
+    $scope.output.push({ 
       timestamp: new Date(), 
-      message: $scope.numbers.reduce(countFrequencies, {})
+      message: totalFrequencies
     });
   }
 }]);

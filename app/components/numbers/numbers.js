@@ -3,7 +3,7 @@
 var numbers = angular.module('myApp.numbers', []);
 numbers.component('numbers', {
   bindings: {
-    list: '='
+    onSubmit: '&'
   },
   templateUrl: 'components/numbers/numbers.html',
   controller: function () {
@@ -12,7 +12,7 @@ numbers.component('numbers', {
         this.numberForm.$setDirty();
         return;
       }
-      this.list.push(number);
+      this.onSubmit({ number: number });
       this.wasFibonacciEntered = isFibonacci(number);
       this.number = null;
       this.numberForm.$setPristine();

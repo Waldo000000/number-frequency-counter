@@ -1,5 +1,5 @@
 <button class="toggle" ng-click="toggle()">{{running ? "Halt" : "Resume"}}</button>
-<numbers list="numbers"></numbers>
+<numbers on-submit="onSubmit(number)"></numbers>
 <button ng-click="quit()">Quit</button>
 
 <table ng-if="!hasQuit" class="output">
