@@ -1,7 +1,6 @@
 'use strict';
 
-var fibonacciNumbers = angular.module('myApp.fibonacciNumbers', []);
-fibonacciNumbers.component('fibonacciNumbers', {
+angular.module('myApp.fibonacciNumbers', []).component('fibonacciNumbers', {
   bindings: {
     onSubmit: '&'
   },

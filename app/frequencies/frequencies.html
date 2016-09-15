@@ -1,19 +1,19 @@
-<button ng-click="quit()">Quit</button>
-<button class="toggle" ng-click="toggle()">{{running ? "Halt" : "Resume"}}</button>
-<fibonacci-numbers on-submit="onSubmit(number)"></fibonacci-numbers>
+<button ng-click="$ctrl.quit()">Quit</button>
+<button class="toggle" ng-click="$ctrl.toggle()">{{$ctrl.running ? "Halt" : "Resume"}}</button>
+<fibonacci-numbers on-submit="$ctrl.onSubmit(number)"></fibonacci-numbers>
 
-<table ng-if="!hasQuit" class="output">
+<table ng-if="!$ctrl.hasQuit" class="output">
   <tr>
     <th class="timestamp">Timestamp</th>
     <th class="message">Message</th>
   </tr>
-  <tr ng-repeat="record in output">
+  <tr ng-repeat="record in $ctrl.output">
     <td>{{record.timestamp}}</td>
     <td>{{record.message}}</td>
   </tr>
 </table>
 
-<div ng-if="hasQuit">
+<div ng-if="$ctrl.hasQuit">
   Thanks for playing! Here is the final tally:
-  <div>{{output[output.length-1].message}}</div>
+  <div>{{$ctrl.finalTally()}}</div>
 </div>

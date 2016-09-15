@@ -5,37 +5,41 @@ var frequencies = angular.module('myApp.frequencies', ['ngRoute'])
 frequencies.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/frequencies/:interval', {
     templateUrl: 'frequencies/frequencies.html',
-    controller: 'FrequenciesCtrl'
+    controller: 'FrequenciesCtrl',
+    controllerAs: '$ctrl'
   });
 }]);
 
-frequencies.controller('FrequenciesCtrl', ['$scope', '$interval', '$routeParams', function ($scope, $interval, $routeParams) {
+frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function ($interval, $routeParams) {
   var interval = $routeParams.interval;
   var numbersToAccumulate = [];
       
-  $scope.output = [];
-  $scope.numbers = [];
+  this.output = [];
   
-  $scope.toggle = function toggle() {
-    if ($scope.running) {
-      $interval.cancel($scope.running);
-      $scope.running = null;
+  this.toggle = function toggle() {
+    if (this.running) {
+      $interval.cancel(this.running);
+      this.running = null;
     }
     else {      
-      $scope.running = $interval(writeFrequencies, interval * 1000);
+      this.running = $interval(writeFrequencies.bind(this), interval * 1000);
     }
   };
   
-  $scope.quit = function quit() {
-    $interval.cancel($scope.running);
-    $scope.hasQuit = true;
+  this.quit = function quit() {
+    $interval.cancel(this.running);
+    this.hasQuit = true;
   }
   
-  $scope.onSubmit = function onSubmit(n) {
+  this.onSubmit = function onSubmit(n) {
     numbersToAccumulate.push(n);
   }
   
-  $scope.toggle();
+  this.finalTally = function finalTally() {
+    return this.output[this.output.length - 1].message;
+  }
+  
+  this.toggle();
   
   var totalFrequencies = {};
   function writeFrequencies() { 
@@ -48,7 +52,7 @@ frequencies.controller('FrequenciesCtrl', ['$scope', '$interval', '$routeParams'
     totalFrequencies = numbersToAccumulate.reduce(accumulateFrequencies, totalFrequencies);
     numbersToAccumulate = [];
     
-    $scope.output.push({ 
+    this.output.push({ 
       timestamp: new Date().toLocaleString(), 
       message: format(totalFrequencies)
     });
