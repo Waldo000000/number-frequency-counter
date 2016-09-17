@@ -19,5 +19,5 @@
 
 <div ng-if="$ctrl.hasQuit">
   Thanks for playing! Here is the final tally:
-  <div>{{$ctrl.finalTally()}}</div>
+  <div>{{$ctrl.output[$ctrl.output.length - 1].message || '(no numbers were input)'}}</div>
 </div>

@@ -11,59 +11,44 @@ frequencies.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', FrequenciesCtrl]);
-
 function FrequenciesCtrl($interval, $routeParams) {
-  
+
   var interval = $routeParams.interval;
-  var numbersToAccumulate = [];
-  var totalFrequencies = {};
+  var frequencies = {};
   this.output = [];
-  
+
   this.toggle = function toggle() {
     if (this.running) {
       $interval.cancel(this.running);
       this.running = null;
     }
-    else {      
-      this.running = $interval(writeFrequencies.bind(this), interval * 1000);
+    else {
+      this.running = $interval(this._writeFrequencies.bind(this), interval * 1000);
     }
   };
-  
+
   this.quit = function quit() {
     $interval.cancel(this.running);
+    this._writeFrequencies();
     this.hasQuit = true;
   }
-  
+
   this.onSubmit = function onSubmit(n) {
-    numbersToAccumulate.push(n);
+    frequencies[n] = (frequencies[n] + 1) || 1;
     this.lastSubmitted = n;
   }
   
-  this.finalTally = function finalTally() {
-    return this.output.length ? this.output[this.output.length - 1].message
-        : '(no numbers were input)';
-  }
-
-  this.toggle(); // Begin!
-
-  function writeFrequencies() { 
-        
-    totalFrequencies = numbersToAccumulate.reduce(accumulateFrequencies, totalFrequencies);
-    numbersToAccumulate = [];
-    
-    this.output.push({ 
-      timestamp: new Date().toLocaleString(), 
-      message: formattedSortedFrequencies(totalFrequencies)
+  this._writeFrequencies = function _writeFrequencies() {
+    this.output.push({
+      timestamp: new Date().toLocaleString(),
+      message: formattedSortedFrequencies(frequencies)
     });
-    
-    function accumulateFrequencies(frequencies, n) {
-      frequencies[n] = (frequencies[n] + 1) || 1;
-      return frequencies;
-    }
-    
+
     function formattedSortedFrequencies(frequencies) {
       var sortedNumbers = Object.keys(frequencies).sort(function (a, b) { return frequencies[b] - frequencies[a] });
       return sortedNumbers.map(function (n) { return n + ':' + frequencies[n] }).join(',');
     }
   }
+
+  this.toggle(); // Begin!
 }
