@@ -1,9 +1,10 @@
 <div ng-if="!$ctrl.hasQuit">
   <number-input on-submit="$ctrl.onSubmit(number)"></number-input>
   <fibonacci number="$ctrl.lastSubmitted"></fibonacci>
-  <button class="toggle" ng-click="$ctrl.toggle()">{{$ctrl.running ? "Halt" : "Resume"}}</button>
-  <button ng-click="$ctrl.quit()">Quit</button>
-
+  <div>
+    <button class="toggle" ng-click="$ctrl.toggle()">{{$ctrl.running ? "Halt" : "Resume"}}</button>
+    <button ng-click="$ctrl.quit()">Quit</button>
+  </div>
   <table ng-if="!$ctrl.hasQuit" class="output">
     <tr>
       <th class="timestamp">Timestamp</th>

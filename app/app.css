@@ -67,3 +67,9 @@ td, th {
   color: darkorange;
   font-weight: bold;
 }
+
+number-input,
+fibonacci
+{
+  display: inline-block;
+}
