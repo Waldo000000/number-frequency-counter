@@ -17,6 +17,11 @@ function FrequenciesCtrl($interval, $routeParams) {
   var frequencies = {};
   this.output = [];
 
+  this.onSubmit = function onSubmit(n) {
+    frequencies[n] = (frequencies[n] + 1) || 1;
+    this.lastSubmitted = n;
+  }
+  
   this.toggle = function toggle() {
     if (this.running) {
       $interval.cancel(this.running);
@@ -32,11 +37,6 @@ function FrequenciesCtrl($interval, $routeParams) {
     this._writeFrequencies();
     this.hasQuit = true;
   }
-
-  this.onSubmit = function onSubmit(n) {
-    frequencies[n] = (frequencies[n] + 1) || 1;
-    this.lastSubmitted = n;
-  }
   
   this._writeFrequencies = function _writeFrequencies() {
     this.output.push({
@@ -46,7 +46,7 @@ function FrequenciesCtrl($interval, $routeParams) {
 
     function formattedSortedFrequencies(frequencies) {
       var sortedNumbers = Object.keys(frequencies).sort(function (a, b) { return frequencies[b] - frequencies[a] });
-      return sortedNumbers.map(function (n) { return n + ':' + frequencies[n] }).join(',');
+      return sortedNumbers.map(function (n) { return n + ':' + frequencies[n] }).join(', ');
     }
   }
 
