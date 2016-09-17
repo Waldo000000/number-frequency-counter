@@ -34,6 +34,7 @@ frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function
   
   this.onSubmit = function onSubmit(n) {
     numbersToAccumulate.push(n);
+    this.lastSubmitted = n;
   }
   
   this.finalTally = function finalTally() {

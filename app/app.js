@@ -4,6 +4,7 @@ var myApp = angular.module('myApp', [
   'ngRoute',
   'myApp.home',
   'myApp.frequencies',
+  'myApp.fibonacci',
   'myApp.fibonacciNumbers'
 ])
 

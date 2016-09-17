@@ -1,5 +1,6 @@
 <div ng-if="!$ctrl.hasQuit">
   <fibonacci-numbers on-submit="$ctrl.onSubmit(number)"></fibonacci-numbers>
+  <fibonacci number="$ctrl.lastSubmitted"></fibonacci>
   <button class="toggle" ng-click="$ctrl.toggle()">{{$ctrl.running ? "Halt" : "Resume"}}</button>
   <button ng-click="$ctrl.quit()">Quit</button>
 
