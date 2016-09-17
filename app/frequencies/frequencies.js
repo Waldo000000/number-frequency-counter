@@ -10,7 +10,9 @@ frequencies.config(['$routeProvider', function ($routeProvider) {
   });
 }]);
 
-frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function ($interval, $routeParams) {
+frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', FrequenciesCtrl]);
+
+function FrequenciesCtrl($interval, $routeParams) {
   
   var interval = $routeParams.interval;
   var numbersToAccumulate = [];
@@ -38,7 +40,8 @@ frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function
   }
   
   this.finalTally = function finalTally() {
-    return this.output[this.output.length - 1].message || '(no numbers were input)';
+    return this.output.length ? this.output[this.output.length - 1].message
+        : '(no numbers were input)';
   }
 
   this.toggle(); // Begin!
@@ -63,4 +66,4 @@ frequencies.controller('FrequenciesCtrl', ['$interval', '$routeParams', function
       return sortedNumbers.map(function (n) { return n + ':' + frequencies[n] }).join(',');
     }
   }
-}]);
+}
