@@ -4,7 +4,7 @@ angular.module('myApp.fibonacci', []).component('fibonacci', {
   bindings: {
     number: '<'
   },
-  templateUrl: 'components/fibonacciNumbers/fibonacci.html',
+  templateUrl: 'components/fibonacci/fibonacci.html',
   controller: FibonacciController
 });
 

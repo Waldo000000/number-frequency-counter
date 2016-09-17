@@ -5,7 +5,7 @@ var myApp = angular.module('myApp', [
   'myApp.home',
   'myApp.frequencies',
   'myApp.fibonacci',
-  'myApp.fibonacciNumbers'
+  'myApp.numberInput'
 ])
 
 myApp.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
