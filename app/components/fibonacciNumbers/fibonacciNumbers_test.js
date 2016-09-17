@@ -5,24 +5,20 @@ describe('myApp.fibonacciNumbers module', function() {
   
   describe('fibonacciNumbers controller', function () {
     
-    var $componentController, sut,
-      bindings = { 
-        number: '',
-        onSubmit: function () {}
-      };
+    var sut;
+    var bindings = { 
+      number: '', 
+      onSubmit: function () { }
+    };
 
     beforeEach(inject(function(_$componentController_) {
-      $componentController = _$componentController_; //tfsbad: inline with next beforeEach, remove $componentController var
-    }));
-    
-    beforeEach(function() {
-      sut = $componentController('fibonacciNumbers', null, bindings);
+      sut = _$componentController_('fibonacciNumbers', null, bindings);
       
       sut.numberForm = { // stub FormController
         $setDirty: jasmine.createSpy('$setDirty'),
         $setPristine: jasmine.createSpy('$setPristine')
       };
-    });
+    }));
     
     describe('wasFibonacciEntered', function () {
       
@@ -34,7 +30,7 @@ describe('myApp.fibonacciNumbers module', function() {
         var notFibonnaciNumbers = [-100, -10, -1, 0, -0.5, 0.5, 1.1];
         
         notFibonnaciNumbers.forEach(function (n) {
-          sut.submit(n)
+          sut.submit(n);
           expect(sut.wasFibonacciEntered).toBe(false);
         }, this);
       });
@@ -47,8 +43,8 @@ describe('myApp.fibonacciNumbers module', function() {
           var expected = fibonacciNumbers.indexOf(n) >= 0;
           expect(sut.wasFibonacciEntered).toBe(expected,
             'Expected ' + n
-            + (expected ? ' to be' : ' to not be')
-            + ' a Fibonacci number');
+            + (expected ? ' to be ' : ' to not be ')
+            + 'a Fibonacci number');
         };
       });
     });
